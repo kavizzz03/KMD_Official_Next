@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  --gold: #d9a017;
+  --gold-deep: #b3800f;
+  --gold-light: #f4c430;
+  --cream: #fff9ec;
+  --cream-deep: #fbeecb;
+  --maroon: #4a1c14;
+  --maroon-deep: #34120c;
+  --ink: #2b1b0e;
+  --card: #fffdf8;
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-poppins);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Scalloped edge, like the crimped paper lining a box of mithai */
+.scallop-bottom {
+  position: relative;
+}
+.scallop-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 22px;
+  background-image: radial-gradient(circle at 12px 0, transparent 12px, var(--cream) 13px);
+  background-size: 24px 24px;
+  background-repeat: repeat-x;
+}
+
+.scallop-top-cream {
+  position: relative;
+}
+.scallop-top-cream::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 22px;
+  background-image: radial-gradient(circle at 12px 22px, transparent 12px, var(--maroon-deep) 13px);
+  background-size: 24px 24px;
+  background-repeat: repeat-x;
+  z-index: 2;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 55%, var(--gold-deep) 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(6deg); }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-22px) rotate(-8deg); }
+}
+.animate-float-slower {
+  animation: float-slower 9s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-float-slow, .animate-float-slower, .animate-marquee {
+    animation: none !important;
+  }
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--maroon-deep);
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+}
