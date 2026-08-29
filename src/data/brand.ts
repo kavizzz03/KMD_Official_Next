@@ -19,8 +19,8 @@ export const BRAND = {
   },
   email: "kmdproduction2025@gmail.com",
   social: {
-    facebook: "https://facebook.com/kmdsweethouse",
-    instagram: "https://instagram.com/kmdsweethouse",
+    facebook: "https://www.facebook.com/share/1Ay1F6JeA8/",
+    instagram: "https://www.instagram.com/kmdsweethouse?igsi=MXhyYTZxaXMzeGtx",
   },
   footerCredit: {
     rights: "All Rights Reserved © KMD Production",

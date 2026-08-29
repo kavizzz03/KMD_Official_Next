@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --gold: #d9a017;
-  --gold-deep: #b3800f;
-  --gold-light: #f4c430;
-  --cream: #fff9ec;
-  --cream-deep: #fbeecb;
-  --maroon: #4a1c14;
-  --maroon-deep: #34120c;
-  --ink: #2b1b0e;
-  --card: #fffdf8;
+  /* Premium artisan palette — antique gold foil on espresso & ivory paper */
+  --ink: #1c140e;
+  --espresso: #241712;
+  --espresso-deep: #150d09;
+  --gold: #c9973f;
+  --gold-bright: #ecc06b;
+  --gold-dim: #8f6a26;
+  --bronze: #a9784a;
+  --cream: #faf5ea;
+  --cream-deep: #f1e3c4;
+  --paper: #fffcf5;
+  --line: rgba(28, 20, 14, 0.1);
+  --line-dark: rgba(236, 192, 107, 0.14);
 
   --font-display: var(--font-fraunces);
-  --font-body: var(--font-poppins);
+  --font-body: var(--font-manrope);
 }
 
 * {
@@ -27,84 +31,117 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--font-body);
+  font-feature-settings: "ss01" 1;
 }
 
 h1, h2, h3, h4, .font-display {
   font-family: var(--font-display);
 }
 
-/* Scalloped edge, like the crimped paper lining a box of mithai */
-.scallop-bottom {
-  position: relative;
-}
-.scallop-bottom::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 22px;
-  background-image: radial-gradient(circle at 12px 0, transparent 12px, var(--cream) 13px);
-  background-size: 24px 24px;
-  background-repeat: repeat-x;
+.italic-accent {
+  font-style: italic;
+  font-weight: 400;
 }
 
-.scallop-top-cream {
-  position: relative;
-}
-.scallop-top-cream::before {
+/* ---------- Texture ---------- */
+.grain::before {
   content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -1px;
-  height: 22px;
-  background-image: radial-gradient(circle at 12px 22px, transparent 12px, var(--maroon-deep) 13px);
-  background-size: 24px 24px;
-  background-repeat: repeat-x;
-  z-index: 2;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
+/* ---------- Gold surfaces ---------- */
 .gold-gradient {
-  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 55%, var(--gold-deep) 100%);
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 55%, var(--gold-dim) 100%);
 }
 
 .text-gold-gradient {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold-deep));
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold-dim));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+.espresso-panel {
+  background:
+    radial-gradient(120% 140% at 10% 0%, rgba(201, 151, 63, 0.14), transparent 55%),
+    var(--espresso);
+}
+
+/* Fine hairline rule, like the gilt edge of a packaging box */
+.hairline {
+  border-color: var(--line);
+}
+.hairline-dark {
+  border-color: var(--line-dark);
+}
+
 .eyebrow {
-  letter-spacing: 0.28em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-14px) rotate(6deg); }
+/* ---------- Buttons ---------- */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.55) 45%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.btn-gold:hover::before {
+  transform: translateX(120%);
 }
 
-@keyframes float-slower {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-22px) rotate(-8deg); }
-}
-.animate-float-slower {
-  animation: float-slower 9s ease-in-out infinite;
-}
-
+/* ---------- Marquee ---------- */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 26s linear infinite;
+  animation: marquee 32s linear infinite;
+}
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ---------- Floating ---------- */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(5deg); }
+}
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-24px) rotate(-7deg); }
+}
+.animate-float-slower { animation: float-slower 10s ease-in-out infinite; }
+
+/* ---------- Scroll progress ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+  z-index: 70;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -116,10 +153,14 @@ h1, h2, h3, h4, .font-display {
 
 ::selection {
   background: var(--gold);
-  color: var(--maroon-deep);
+  color: var(--paper);
 }
 
 a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--gold-deep);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 8px; }
