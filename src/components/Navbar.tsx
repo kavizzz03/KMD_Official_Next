@@ -59,7 +59,11 @@ export default function Navbar() {
         }`}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
-          <Link href="/" className="group flex items-center gap-3">
+          <Link 
+            href="/" 
+            className="group flex items-center gap-3"
+            onClick={() => setOpen(false)}
+          >
             <Monogram />
             <span className="font-display text-lg font-semibold tracking-tight text-[var(--cream)] sm:text-xl">
               KMD <span className="italic-accent text-[var(--gold-bright)]">Sweet House</span>
@@ -131,6 +135,7 @@ export default function Navbar() {
               >
                 <Link
                   href={l.href}
+                  onClick={() => setOpen(false)}
                   className="font-display text-4xl font-medium text-[var(--cream)] transition-colors hover:text-[var(--gold-bright)]"
                 >
                   {l.label}
@@ -145,6 +150,7 @@ export default function Navbar() {
             >
               <Link
                 href="/contact"
+                onClick={() => setOpen(false)}
                 className="gold-gradient inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-[var(--espresso-deep)] shadow-lg"
               >
                 <FaWhatsapp /> Order Now
